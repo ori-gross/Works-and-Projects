@@ -1,0 +1,135 @@
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst49|object_move:inst|SM_PS
+Name SM_PS.POSITION_CHANGE_ST SM_PS.COLLISION_HANDLE_ST SM_PS.MOVE_ST SM_PS.IDLE_ST SM_PS.POSITION_LIMITS_ST 
+SM_PS.IDLE_ST 0 0 0 0 0 
+SM_PS.MOVE_ST 0 0 1 1 0 
+SM_PS.COLLISION_HANDLE_ST 0 1 0 1 0 
+SM_PS.POSITION_CHANGE_ST 1 0 0 1 0 
+SM_PS.POSITION_LIMITS_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst50|object_move:inst|SM_PS
+Name SM_PS.POSITION_CHANGE_ST SM_PS.COLLISION_HANDLE_ST SM_PS.MOVE_ST SM_PS.IDLE_ST SM_PS.POSITION_LIMITS_ST 
+SM_PS.IDLE_ST 0 0 0 0 0 
+SM_PS.MOVE_ST 0 0 1 1 0 
+SM_PS.COLLISION_HANDLE_ST 0 1 0 1 0 
+SM_PS.POSITION_CHANGE_ST 1 0 0 1 0 
+SM_PS.POSITION_LIMITS_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst48|object_move:inst|SM_PS
+Name SM_PS.POSITION_CHANGE_ST SM_PS.COLLISION_HANDLE_ST SM_PS.MOVE_ST SM_PS.IDLE_ST SM_PS.POSITION_LIMITS_ST 
+SM_PS.IDLE_ST 0 0 0 0 0 
+SM_PS.MOVE_ST 0 0 1 1 0 
+SM_PS.COLLISION_HANDLE_ST 0 1 0 1 0 
+SM_PS.POSITION_CHANGE_ST 1 0 0 1 0 
+SM_PS.POSITION_LIMITS_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst51|object_move:inst|SM_PS
+Name SM_PS.POSITION_CHANGE_ST SM_PS.COLLISION_HANDLE_ST SM_PS.MOVE_ST SM_PS.IDLE_ST SM_PS.POSITION_LIMITS_ST 
+SM_PS.IDLE_ST 0 0 0 0 0 
+SM_PS.MOVE_ST 0 0 1 1 0 
+SM_PS.COLLISION_HANDLE_ST 0 1 0 1 0 
+SM_PS.POSITION_CHANGE_ST 1 0 0 1 0 
+SM_PS.POSITION_LIMITS_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|Pacman_Block_T:inst15|object_move:inst2|SM_PS
+Name SM_PS.POSITION_CHANGE_ST SM_PS.COLLISION_HANDLE_ST SM_PS.MOVE_ST SM_PS.IDLE_ST SM_PS.POSITION_LIMITS_ST 
+SM_PS.IDLE_ST 0 0 0 0 0 
+SM_PS.MOVE_ST 0 0 1 1 0 
+SM_PS.COLLISION_HANDLE_ST 0 1 0 1 0 
+SM_PS.POSITION_CHANGE_ST 1 0 0 1 0 
+SM_PS.POSITION_LIMITS_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|COINS_DISPLAY:inst43|CoinsMatrixBitMap:inst|coin_ps
+Name coin_ps.s_end coin_ps.s_play coin_ps.s_initialize coin_ps.s_idle 
+coin_ps.s_idle 0 0 0 0 
+coin_ps.s_initialize 0 0 1 1 
+coin_ps.s_play 0 1 0 1 
+coin_ps.s_end 1 0 0 1 
+
+State Machine - |TOP_VGA_PROJECT|sound_manager:inst46|sound_type
+Name sound_type.111 sound_type.110 sound_type.101 sound_type.100 sound_type.011 sound_type.010 sound_type.001 sound_type.000 
+sound_type.000 0 0 0 0 0 0 0 0 
+sound_type.001 0 0 0 0 0 0 1 1 
+sound_type.010 0 0 0 0 0 1 0 1 
+sound_type.011 0 0 0 0 1 0 0 1 
+sound_type.100 0 0 0 1 0 0 0 1 
+sound_type.101 0 0 1 0 0 0 0 1 
+sound_type.110 0 1 0 0 0 0 0 1 
+sound_type.111 1 0 0 0 0 0 0 1 
+
+State Machine - |TOP_VGA_PROJECT|Pacman_Block_T:inst15|pacmanBitMap:inst5|last_move
+Name last_move.11 last_move.10 last_move.01 last_move.00 
+last_move.00 0 0 0 0 
+last_move.01 0 0 1 1 
+last_move.10 0 1 0 1 
+last_move.11 1 0 0 1 
+
+State Machine - |TOP_VGA_PROJECT|Pacman_Block_T:inst15|pacmanBitMap:inst5|pacman_ps
+Name pacman_ps.s_break pacman_ps.s_close pacman_ps.s_up pacman_ps.s_left pacman_ps.s_down pacman_ps.s_right pacman_ps.s_idle 
+pacman_ps.s_idle 0 0 0 0 0 0 0 
+pacman_ps.s_right 0 0 0 0 0 1 1 
+pacman_ps.s_down 0 0 0 0 1 0 1 
+pacman_ps.s_left 0 0 0 1 0 0 1 
+pacman_ps.s_up 0 0 1 0 0 0 1 
+pacman_ps.s_close 0 1 0 0 0 0 1 
+pacman_ps.s_break 1 0 0 0 0 0 1 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst49|monsterBitMap:inst2|monster_ps
+Name monster_ps.s_idle monster_ps.s_green monster_ps.s_red 
+monster_ps.s_idle 0 0 0 
+monster_ps.s_red 1 0 1 
+monster_ps.s_green 1 1 0 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst50|monsterBitMap:inst2|monster_ps
+Name monster_ps.s_idle monster_ps.s_green monster_ps.s_red 
+monster_ps.s_idle 0 0 0 
+monster_ps.s_red 1 0 1 
+monster_ps.s_green 1 1 0 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst48|monsterBitMap:inst2|monster_ps
+Name monster_ps.s_idle monster_ps.s_green monster_ps.s_red 
+monster_ps.s_idle 0 0 0 
+monster_ps.s_red 1 0 1 
+monster_ps.s_green 1 1 0 
+
+State Machine - |TOP_VGA_PROJECT|Monster_Block_T:inst51|monsterBitMap:inst2|monster_ps
+Name monster_ps.s_idle monster_ps.s_green monster_ps.s_red 
+monster_ps.s_idle 0 0 0 
+monster_ps.s_red 1 0 1 
+monster_ps.s_green 1 1 0 
+
+State Machine - |TOP_VGA_PROJECT|game_controller:inst19|GAME_PS
+Name GAME_PS.NEXT_LEVEL_ST GAME_PS.WIN_ST GAME_PS.RESET_INFO_ST GAME_PS.LOSE_ST GAME_PS.PLAY_ST GAME_PS.INITIALIZATION_ST GAME_PS.IDLE_ST 
+GAME_PS.IDLE_ST 0 0 0 0 0 0 0 
+GAME_PS.INITIALIZATION_ST 0 0 0 0 0 1 1 
+GAME_PS.PLAY_ST 0 0 0 0 1 0 1 
+GAME_PS.LOSE_ST 0 0 0 1 0 0 1 
+GAME_PS.RESET_INFO_ST 0 0 1 0 0 0 1 
+GAME_PS.WIN_ST 0 1 0 0 0 0 1 
+GAME_PS.NEXT_LEVEL_ST 1 0 0 0 0 0 1 
+
+State Machine - |TOP_VGA_PROJECT|TOP_KBD:inst16|KBDINTF:inst|lpf:inst5|cur_st
+Name cur_st.ONE 
+cur_st.ZERO 0 
+cur_st.ONE 1 
+
+State Machine - |TOP_VGA_PROJECT|TOP_KBD:inst16|KBDINTF:inst|bitrec:inst4|cur_st
+Name cur_st.CHK_DATA_ST cur_st.HI_CLK_ST cur_st.LOW_CLK_ST cur_st.IDLE_ST cur_st.NEW_DATA_ST 
+cur_st.IDLE_ST 0 0 0 0 0 
+cur_st.LOW_CLK_ST 0 0 1 1 0 
+cur_st.HI_CLK_ST 0 1 0 1 0 
+cur_st.CHK_DATA_ST 1 0 0 1 0 
+cur_st.NEW_DATA_ST 0 0 0 1 1 
+
+State Machine - |TOP_VGA_PROJECT|TOP_KBD:inst16|KBDINTF:inst|byterec:inst3|present_state
+Name present_state.sample_ext_rel_ST present_state.wait_ext_rel_ST present_state.sample_ext_ST present_state.wait_ext_ST present_state.new_break_ST present_state.sample_rel_ST present_state.wait_rel_ST present_state.new_make_ST present_state.sample_nor_ST present_state.idle_ST 
+present_state.idle_ST 0 0 0 0 0 0 0 0 0 0 
+present_state.sample_nor_ST 0 0 0 0 0 0 0 0 1 1 
+present_state.new_make_ST 0 0 0 0 0 0 0 1 0 1 
+present_state.wait_rel_ST 0 0 0 0 0 0 1 0 0 1 
+present_state.sample_rel_ST 0 0 0 0 0 1 0 0 0 1 
+present_state.new_break_ST 0 0 0 0 1 0 0 0 0 1 
+present_state.wait_ext_ST 0 0 0 1 0 0 0 0 0 1 
+present_state.sample_ext_ST 0 0 1 0 0 0 0 0 0 1 
+present_state.wait_ext_rel_ST 0 1 0 0 0 0 0 0 0 1 
+present_state.sample_ext_rel_ST 1 0 0 0 0 0 0 0 0 1 
