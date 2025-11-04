@@ -1,0 +1,154 @@
+tasks:
+1. add profiling for calls - should be similar to indirect jumps
+   // DONE
+
+2. identify and use killed registers in the profiling phase - need to impelment some
+   kind of reg liveness, probably using the backward data-flow analysis.
+   // We went for simple approach of indentifying a instruciton that kills RAX
+      and if the terminating ins is direct or just normal ins (not indirect or ret)
+      we just use RAX for bbl profiling without saving it
+
+3. when we switch to tc2, use the profiling data to convert indirect jumps
+      into direct jumps with the hottest target. It would lead to needing to do
+      some conditional statement to reach this direct jump instead of the indirect.
+      we should identify the hottest by looking at the percentage of the jumps in the
+      specific instrustion.
+   3.1. we have some kind of logic to optimize the jmp reg case. need to make sure that
+      the hot_target is the same also in TC2 (need to run profiling on tc2 for that).
+   3.2. need to add logic to optimize jmp [memops] case. e.g. jmp qword ptr [0x8267a0].
+   // DONE for all
+
+4. bonus: more optimizations - such as loop unrolling and function inlining
+
+5. Create script to run the normal command (without pin) 10 times,
+   run with pin 10 times for each of the following:
+      - prof_time 1
+      - prof_time 2
+      - prof_time 3
+      - prof_time 4
+      - prof_time 5
+      - prof_time 6
+   calculate for all the run time using real and user times (for pin decrease the tc creation time),
+   calculate the average for each of the variations
+   calculate the runtime of pin comapared to without it (we want an increase lower than 15%)
+   save the runtime values, averages and comparisons to a csv file
+
+6. Make a presentation detailing our work and explaining it.
+
+=========================================================================
+Insights from meeting:
+1. de-virtualization: Should only target cases where the hot-target is pointing to the
+   original code. meaning if the hot-traget is to TC, its probably an offset from the jump
+   which is calculated during runtime so we would expect it to be inside TC2 when it runs there.
+
+2. runtime calculation: should be fine to look at user time. but if system is not busy then elapsed
+   time (real) should be the best. need to run with optimization/normal (without pin) at least 5 times
+   and calculate average.
+
+3. killed regs: should be just a small optimization for the profiling aspect. meaning, if we find an
+   instruction that kills a reg, we can insert the profiling for the basic block before it, and save
+   up some overhead of storing to memory.
+
+=========================================================================
+
+tc:
+jmp qword ptr [0x8267a0]
+
+(option 1)
+tc2: (needs killed reg)
+move rax, qword ptr [0x8267a0]
+cmp rax, hot_target
+jz hot_target
+jmp rax
+
+(option 2)
+tc2:
+cmp qword ptr [0x8267a0], hot_target
+jz hot_target
+jmp qword ptr [0x8267a0]
+
+
+tc:
+jmp rdx
+
+tc2:
+cmp rdx, hot_target
+jeq hot_target
+jmp rdx
+
+jmp 0x438473874
+call 0x834837434
+
+0x438473874: add maf, 0x3232
+
+=========================================================================
+profile ins: (size == 7 bytes)
+move rax, qword ptr [0x8267a0]
+
+optimization ins: (size == 9 bytes)
+cmp rdx, 0x7f24f903c6c0
+
+
+profiling indirect jump (TC):
+
+0x7f16d55cf94e: nop qword ptr [rax]
+0x7f16d55cf953: mov qword ptr [0x7f16e9114c28], rax
+0x7f16d55cf95d: mov rax, rbx
+0x7f16d55cf960: mov qword ptr [0x7f16e9114c20], rax
+0x7f16d55cf96a: mov rax, rcx
+0x7f16d55cf96d: mov qword ptr [0x7f16e9114c18], rax
+0x7f16d55cf977: mov rax, rdx
+0x7f16d55cf97a: mov rbx, rax
+0x7f16d55cf97d: and rax, 0x3
+0x7f16d55cf981: mov rcx, 0x7f16dad46880
+0x7f16d55cf98b: mov qword ptr [rcx+rax*8], rbx
+0x7f16d55cf993: mov rbx, 0x7f16dad468a0
+0x7f16d55cf99d: mov rcx, qword ptr [rbx+rax*8]
+0x7f16d55cf9a5: lea rcx, ptr [rcx+0x1]
+0x7f16d55cf9a9: mov qword ptr [rbx+rax*8], rcx
+0x7f16d55cf9b1: mov rax, qword ptr [0x7f16e9114c18]
+0x7f16d55cf9bb: mov rcx, rax
+0x7f16d55cf9be: mov rax, qword ptr [0x7f16e9114c20]
+0x7f16d55cf9c8: mov rbx, rax
+0x7f16d55cf9cb: mov rax, qword ptr [0x7f16dad46870]
+0x7f16d55cf9d5: lea rax, ptr [rax+0x1]
+0x7f16d55cf9d9: mov qword ptr [0x7f16dad46870], rax
+0x7f16d55cf9e3: mov rax, qword ptr [0x7f16e9114c28]
+0x7f16d55cf9ed: jmp rdx
+
+=================================================
+optimization indirect jump (TC2):
+
+cmp rdx, hot_target
+jnz og_jump
+jmp tranlated_hot_target
+og_jump: jmp rdx
+
+mov rax_mem, rax
+mov rax, [base_reg + index_reg*scale]
+cmp rax, hot_target
+mov rax, rax_mem
+jnz og_jump
+jmp tranlated_hot_target
+og_jump: jmp qword ptr [rax*8+0x63eb38]
+
+=================================================
+
+optimization indirect call (TC2):
+
+cmp rdx, hot_target
+jnz og_call
+call tranlated_hot_target
+jmp after_call
+og_call: call rdx
+after_call:
+
+mov rax_mem, rax
+mov rax, [base_reg + index_reg*scale]
+cmp rax, hot_target
+mov rax, rax_mem
+jnz og_call
+call tranlated_hot_target
+jmp after_call
+og_call: call qword ptr [rax*8+0x63eb38]
+after_call:
