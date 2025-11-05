@@ -1,0 +1,13 @@
+*.txt
+*.cache
+instructions.sh
+.venv/*
+dataset/*
+yolo*.pt
+*.zip
+*.tar.gz
+*.tar
+*.tar.xz
+*.bkp
+*.dtmp
+evaluation_vids/output/*
