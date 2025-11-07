@@ -1,0 +1,23 @@
+int i_plus_last(i:int, n:int, ...) 
+{
+    return va_arg(int, i) + va_arg(int, n-1);
+}
+
+void main()
+{
+    i:int;
+    n:int;
+    a:int;
+    b:int;
+    c:int;
+    d:int;
+    res:int;
+    read(i);
+    read(a);
+    read(b);
+    read(c);
+    read(d);
+    n = 4;
+    res = i_plus_last(i, n, a, b, c, d);
+    write(res);
+}
